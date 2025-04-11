@@ -1,7 +1,7 @@
 #Subject: CSP2348
 #Assignment: Assignment 2 – Algorithm Implementation and Analysis
 #Student Name: Kaveesha Hansani
-#Date:11/04/2025
+#Date: 11/04/2025
 
 import time
 import random
@@ -10,8 +10,8 @@ import math
 
 
 # Q1: Array-Based Sorting Algorithms
-# Each function sorts a copy of the input array, counts comparisons,
-# and measures the run time (in milliseconds). The functions return a tuple:
+# Each function sorts a copy of the input array, counts comparisons, and measures
+# the run time (in milliseconds). The functions return a tuple:
 # (sorted array, number of comparisons, elapsed time in ms).
 
 # 1. Selection Sort
@@ -217,7 +217,6 @@ def sink_down_sort(arr):
     start_time = time.time()
     for i in range(n - 1):
         swapped = False
-        # Traverse from the end down to index i + 1.
         for j in range(n - 1, i, -1):
             comparisons += 1
             if a[j] < a[j - 1]:
@@ -261,8 +260,7 @@ def bdb_sort(arr):
 
 # Q3: Experimental System
 # This system allows the user to test sorting algorithms in two modes:
-# a) Manual testing (individual and multiple algorithms)
-# b) Automatic testing (running experiments over multiple array sizes & runs)
+# (a) Manual Testing and (b) Automatic Testing.
 
 # Mapping for sorting algorithms for the menu.
 sorting_algorithms = {
@@ -327,7 +325,7 @@ def manual_individual_test():
     sorted_array, comparisons, runtime_ms = alg_func(array_data)
     print(f"Number of comparisons: {comparisons}")
     print(f"Run time: {runtime_ms:.2f} ms")
-    # Uncomment below to print the sorted array.
+    # Uncomment below to display the sorted array.
     # print("Sorted Array:", sorted_array)
 
 def manual_multiple_test():
@@ -364,13 +362,18 @@ def manual_testing_menu():
             print("Invalid choice. Please try again.")
 
 # Automatic testing function.
+# This version forces exactly 10 iterations (array sizes) regardless of user input.
 def automatic_testing():
     try:
         start_n = int(input("Enter the starting array size (n > 0): "))
-        end_n = int(input("Enter the ending array size (n > start_n): "))
         step = int(input("Enter the step size: "))
-        runs = int(input("Enter the number of runs per array size: "))
-        if start_n <= 0 or end_n <= start_n or step <= 0 or runs <= 0:
+        # Default: automatically run for 10 different array sizes.
+        runs_input = input("Enter the number of runs per array size (default 10): ").strip()
+        if runs_input == "":
+            runs = 10
+        else:
+            runs = int(runs_input)
+        if start_n <= 0 or step <= 0 or runs <= 0:
             print("Invalid parameters. Please try again.")
             return
     except ValueError:
@@ -378,17 +381,15 @@ def automatic_testing():
         return
 
     print("\nAutomatic Testing Results (Averaged over runs):")
-    # Table header
     header = f"{'Algorithm':25} | {'Array Size':10} | {'Avg Comparisons':18} | {'Avg Runtime (ms.)':18}"
     print("=" * len(header))
     print(header)
     print("=" * len(header))
-
-    # For each algorithm, for each array size, compute average comparisons and runtime.
-    # We will run each algorithm 'runs' times per array size.
+    # Force exactly 10 iterations.
     for key in sorted(sorting_algorithms.keys(), key=lambda x: x.upper()):
         alg_name, alg_func = sorting_algorithms[key]
-        for n in range(start_n, end_n + 1, step):
+        for i in range(10):
+            n = start_n + i * step
             total_comp = 0
             total_time = 0
             for r in range(runs):
@@ -417,6 +418,6 @@ def main_menu():
         else:
             print("Invalid choice. Please try again.")
 
-# Entry Point
+# Entry Point.
 if __name__ == "__main__":
     main_menu()
