@@ -1,9 +1,7 @@
-Subject: CSP2348
-Assignment: Assignment 2 – Algorithm Implementation and Analysis
-Student Name: Kaveesha Hansani
-Date:11/04/2025
-
-
+#Subject: CSP2348
+#Assignment: Assignment 2 – Algorithm Implementation and Analysis
+#Student Name: Kaveesha Hansani
+#Date:11/04/2025
 
 import time
 import random
